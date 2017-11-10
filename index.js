@@ -14,6 +14,7 @@ var settings = {};
 settings.CONFIG_FILE = argv.config || 'config.xml';
 settings.ICON_FILE = argv.icon || 'icon.png';
 settings.OLD_XCODE_PATH = argv['xcode-old'] || false;
+settings.ICON_NAME = argv.name || null;
 
 /**
  * Check which platforms are added to the project and return their icon names and sizes
@@ -30,40 +31,43 @@ var getPlatforms = function (projectName) {
     xcodeFolder = '/Resources/icons/';
   }
 
+  var iconName = settings.ICON_NAME || 'icon';
+  var appIconName = settings.ICON_NAME || 'AppIcon';
+
   platforms.push({
     name : 'ios',
     // TODO: use async fs.exists
     isAdded : fs.existsSync('platforms/ios'),
     iconsPath : 'platforms/ios/' + projectName + xcodeFolder,
     icons : [
-      { name: 'icon-20.png',             size : 20   },
-      { name: 'icon-20@2x.png',          size : 40   },
-      { name: 'icon-20@3x.png',          size : 60   },
-      { name: 'icon-40.png',             size : 40   },
-      { name: 'icon-40@2x.png',          size : 80   },
-      { name: 'icon-50.png',             size : 50   },
-      { name: 'icon-50@2x.png',          size : 100  },
-      { name: 'icon-60@2x.png',          size : 120  },
-      { name: 'icon-60@3x.png',          size : 180  },
-      { name: 'icon-72.png',             size : 72   },
-      { name: 'icon-72@2x.png',          size : 144  },
-      { name: 'icon-76.png',             size : 76   },
-      { name: 'icon-76@2x.png',          size : 152  },
-      { name: 'icon-83.5@2x.png',        size : 167  },
-      { name: 'icon-1024.png',           size : 1024 },
-      { name: 'icon-small.png',          size : 29   },
-      { name: 'icon-small@2x.png',       size : 58   },
-      { name: 'icon-small@3x.png',       size : 87   },
-      { name: 'icon.png',                size : 57   },
-      { name: 'icon@2x.png',             size : 114  },
-      { name: 'AppIcon24x24@2x.png',     size : 48   },
-      { name: 'AppIcon27.5x27.5@2x.png', size : 55   },
-      { name: 'AppIcon29x29@2x.png',     size : 58   },
-      { name: 'AppIcon29x29@3x.png',     size : 87   },
-      { name: 'AppIcon40x40@2x.png',     size : 80   },
-      { name: 'AppIcon44x44@2x.png',     size : 88   },
-      { name: 'AppIcon86x86@2x.png',     size : 172  },
-      { name: 'AppIcon98x98@2x.png',     size : 196  }
+      { name: ''+iconName+'-20.png',             size : 20   },
+      { name: ''+iconName+'-20@2x.png',          size : 40   },
+      { name: ''+iconName+'-20@3x.png',          size : 60   },
+      { name: ''+iconName+'-40.png',             size : 40   },
+      { name: ''+iconName+'-40@2x.png',          size : 80   },
+      { name: ''+iconName+'-50.png',             size : 50   },
+      { name: ''+iconName+'-50@2x.png',          size : 100  },
+      { name: ''+iconName+'-60@2x.png',          size : 120  },
+      { name: ''+iconName+'-60@3x.png',          size : 180  },
+      { name: ''+iconName+'-72.png',             size : 72   },
+      { name: ''+iconName+'-72@2x.png',          size : 144  },
+      { name: ''+iconName+'-76.png',             size : 76   },
+      { name: ''+iconName+'-76@2x.png',          size : 152  },
+      { name: ''+iconName+'-83.5@2x.png',        size : 167  },
+      { name: ''+iconName+'-1024.png',           size : 1024 },
+      { name: ''+iconName+'-small.png',          size : 29   },
+      { name: ''+iconName+'-small@2x.png',       size : 58   },
+      { name: ''+iconName+'-small@3x.png',       size : 87   },
+      { name: ''+iconName+'.png',                size : 57   },
+      { name: ''+iconName+'@2x.png',             size : 114  },
+      { name: ''+appIconName+'24x24@2x.png',     size : 48   },
+      { name: ''+appIconName+'27.5x27.5@2x.png', size : 55   },
+      { name: ''+appIconName+'29x29@2x.png',     size : 58   },
+      { name: ''+appIconName+'29x29@3x.png',     size : 87   },
+      { name: ''+appIconName+'40x40@2x.png',     size : 80   },
+      { name: ''+appIconName+'44x44@2x.png',     size : 88   },
+      { name: ''+appIconName+'86x86@2x.png',     size : 172  },
+      { name: ''+appIconName+'98x98@2x.png',     size : 196  }
     ]
   });
   platforms.push({
@@ -71,19 +75,19 @@ var getPlatforms = function (projectName) {
     isAdded : fs.existsSync('platforms/android'),
     iconsPath : 'platforms/android/res/',
     icons : [
-      { name : 'drawable/icon.png',       size : 96 },
-      { name : 'drawable-hdpi/icon.png',  size : 72 },
-      { name : 'drawable-ldpi/icon.png',  size : 36 },
-      { name : 'drawable-mdpi/icon.png',  size : 48 },
-      { name : 'drawable-xhdpi/icon.png', size : 96 },
-      { name : 'drawable-xxhdpi/icon.png', size : 144 },
-      { name : 'drawable-xxxhdpi/icon.png', size : 192 },
-      { name : 'mipmap-hdpi/icon.png',  size : 72 },
-      { name : 'mipmap-ldpi/icon.png',  size : 36 },
-      { name : 'mipmap-mdpi/icon.png',  size : 48 },
-      { name : 'mipmap-xhdpi/icon.png', size : 96 },
-      { name : 'mipmap-xxhdpi/icon.png', size : 144 },
-      { name : 'mipmap-xxxhdpi/icon.png', size : 192 }
+      { name : 'drawable/'+iconName+'.png',       size : 96 },
+      { name : 'drawable-hdpi/'+iconName+'.png',  size : 72 },
+      { name : 'drawable-ldpi/'+iconName+'.png',  size : 36 },
+      { name : 'drawable-mdpi/'+iconName+'.png',  size : 48 },
+      { name : 'drawable-xhdpi/'+iconName+'.png', size : 96 },
+      { name : 'drawable-xxhdpi/'+iconName+'.png', size : 144 },
+      { name : 'drawable-xxxhdpi/'+iconName+'.png', size : 192 },
+      { name : 'mipmap-hdpi/'+iconName+'.png',  size : 72 },
+      { name : 'mipmap-ldpi/'+iconName+'.png',  size : 36 },
+      { name : 'mipmap-mdpi/'+iconName+'.png',  size : 48 },
+      { name : 'mipmap-xhdpi/'+iconName+'.png', size : 96 },
+      { name : 'mipmap-xxhdpi/'+iconName+'.png', size : 144 },
+      { name : 'mipmap-xxxhdpi/'+iconName+'.png', size : 192 }
     ]
   });
   platforms.push({
@@ -92,12 +96,12 @@ var getPlatforms = function (projectName) {
     isAdded : fs.existsSync('platforms/osx'),
     iconsPath : 'platforms/osx/' + projectName + xcodeFolder,
     icons : [
-      { name : 'icon-16x16.png',    size : 16  },
-      { name : 'icon-32x32.png',    size : 32  },
-      { name : 'icon-64x64.png',    size : 64  },
-      { name : 'icon-128x128.png',  size : 128 },
-      { name : 'icon-256x256.png',  size : 256 },
-      { name : 'icon-512x512.png',  size : 512 }
+      { name : ''+iconName+'-16x16.png',    size : 16  },
+      { name : ''+iconName+'-32x32.png',    size : 32  },
+      { name : ''+iconName+'-64x64.png',    size : 64  },
+      { name : ''+iconName+'-128x128.png',  size : 128 },
+      { name : ''+iconName+'-256x256.png',  size : 256 },
+      { name : ''+iconName+'-512x512.png',  size : 512 }
     ]
   });
   platforms.push({

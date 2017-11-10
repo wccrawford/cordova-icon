@@ -32,6 +32,10 @@ Then run:
 You also can specify manually a location for your `config.xml` or `icon.png`:
 
      $ cordova-icon --config=config.xml --icon=icon.png
+     
+ You also can specify manually a name for the icons:
+     
+	  $ cordova-icon --name=custom_icon
 
 If you run a old version of Cordova for iOS / Mac and you need your files in `/Resources/icons/`, use this option:
 
