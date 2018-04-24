@@ -15,6 +15,9 @@ settings.CONFIG_FILE = argv.config || 'config.xml';
 settings.ICON_FILE = argv.icon || 'icon.png';
 settings.OLD_XCODE_PATH = argv['xcode-old'] || false;
 settings.ICON_NAME = argv.name || null;
+settings.TARGET_DP = argv.dp || 48;
+
+var androidMult = settings.TARGET_DP / 48;
 
 /**
  * Check which platforms are added to the project and return their icon names and sizes
@@ -75,19 +78,19 @@ var getPlatforms = function (projectName) {
     isAdded : fs.existsSync('platforms/android'),
     iconsPath : 'platforms/android/res/',
     icons : [
-      { name : 'drawable/'+iconName+'.png',       size : 96 },
-      { name : 'drawable-hdpi/'+iconName+'.png',  size : 72 },
-      { name : 'drawable-ldpi/'+iconName+'.png',  size : 36 },
-      { name : 'drawable-mdpi/'+iconName+'.png',  size : 48 },
-      { name : 'drawable-xhdpi/'+iconName+'.png', size : 96 },
-      { name : 'drawable-xxhdpi/'+iconName+'.png', size : 144 },
-      { name : 'drawable-xxxhdpi/'+iconName+'.png', size : 192 },
-      { name : 'mipmap-hdpi/'+iconName+'.png',  size : 72 },
-      { name : 'mipmap-ldpi/'+iconName+'.png',  size : 36 },
-      { name : 'mipmap-mdpi/'+iconName+'.png',  size : 48 },
-      { name : 'mipmap-xhdpi/'+iconName+'.png', size : 96 },
-      { name : 'mipmap-xxhdpi/'+iconName+'.png', size : 144 },
-      { name : 'mipmap-xxxhdpi/'+iconName+'.png', size : 192 }
+      { name : 'drawable/'+iconName+'.png',       size : 96 * androidMult },
+      { name : 'drawable-hdpi/'+iconName+'.png',  size : 72 * androidMult },
+      { name : 'drawable-ldpi/'+iconName+'.png',  size : 36 * androidMult },
+      { name : 'drawable-mdpi/'+iconName+'.png',  size : 48 * androidMult },
+      { name : 'drawable-xhdpi/'+iconName+'.png', size : 96 * androidMult },
+      { name : 'drawable-xxhdpi/'+iconName+'.png', size : 144 * androidMult },
+      { name : 'drawable-xxxhdpi/'+iconName+'.png', size : 192 * androidMult },
+      { name : 'mipmap-hdpi/'+iconName+'.png',  size : 72 * androidMult },
+      { name : 'mipmap-ldpi/'+iconName+'.png',  size : 36 * androidMult },
+      { name : 'mipmap-mdpi/'+iconName+'.png',  size : 48 * androidMult },
+      { name : 'mipmap-xhdpi/'+iconName+'.png', size : 96 * androidMult },
+      { name : 'mipmap-xxhdpi/'+iconName+'.png', size : 144 * androidMult },
+      { name : 'mipmap-xxxhdpi/'+iconName+'.png', size : 192 * androidMult }
     ]
   });
   platforms.push({
